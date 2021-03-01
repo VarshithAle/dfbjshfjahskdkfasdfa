@@ -1,6 +1,6 @@
-var runner
+var runner, prize
 
-var laser1,laser2
+var laser1, laser2, laser3, laser4
 
 var edges
 
@@ -8,25 +8,28 @@ var wall1,wall2,wall3,wall4,wall5,wall6,wall7,wall8,wall9,wall10,wall11,wall12,w
 wall20,wall21,wall22,wall23,wall24,wall25,wall26,wall27,wall28,wall29,wall30,wall31,wall32,wall33,wall34,wall35,wall36,wall37,
 wall38,wall39,wall40,wall41,wall42,wall43,wall44,wall45,wall46,wall47,wall48,wall49,wall50,wall51,wall52,wall53
 
-var temp1, temp2, temp3, temp4
 
 function setup() {
   createCanvas(800,400,200,200);
  runner = new Player(50,360,10,10)
  edges = createEdgeSprites();
 
- var laser1 = createSprite(100,100,200,5);
-laser1.shapeColor="red";
-laser1.velocityY=2;
+ prize = new Player(50,40,30,30)
+ prize.body.shapeColor = "yellow"
 
-var laser2 = createSprite(300,300,200,5);
-laser2.shapeColor="red";
-laser2.velocityY=2;
+laser1 = new Laser(100,200,5,200);
+laser1.laser.velocityY=2;
 
-temp1 = createSprite(0,200,5,400)
-temp2 = createSprite(800,200,5,400)
-temp3 = createSprite(400,0,800,5)
-temp4 = createSprite(400,400,800,5)
+laser2 = new Laser(300,200,5,200);
+laser2.laser.velocityY=2;
+
+laser3 = new Laser(500,200,5,200);
+laser3.laser.velocityY=2;
+
+laser4 = new Laser(700,200,5,200);
+laser4.laser.velocityY=2;
+
+
 
 //runner.bounceOff(edges);
 
@@ -97,7 +100,28 @@ function draw() {
   text(mouseX+","+mouseY,mouseX,mouseY)
 
 
+  if(runner.body.isTouching(laser1.laser)){
+laser1.laser.velocityY = 0
+}
+
+if(runner.body.isTouching(laser2.laser)){
+laser2.laser.velocityY = 0
+}
+  
+if(runner.body.isTouching(laser3.laser)){
+laser3.laser.velocityY = 0
+}
+
+if(runner.body.isTouching(laser4.laser)){
+laser4.laser.velocityY = 0
+}
+
+
 
   runner.display();
+  laser1.display();
+  laser2.display();
+  laser3.display();
+  laser4.display();
   drawSprites();
 }
